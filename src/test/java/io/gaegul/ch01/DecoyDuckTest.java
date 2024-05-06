@@ -1,6 +1,7 @@
 package io.gaegul.ch01;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.DisplayNameGeneration;
@@ -15,10 +16,24 @@ import io.gaegul.util.ConsoleIOTest;
 class DecoyDuckTest extends ConsoleIOTest {
 
 	@Test
+	void 소리를_낼_수_없다() {
+		Duck duck = new DecoyDuck();
+		assertThatThrownBy(duck::performQuack)
+			.isInstanceOf(UnsupportedOperationException.class);
+	}
+
+	@Test
 	void 헤엄을_칠_수_있다() {
 		Duck duck = new DecoyDuck();
 		boolean result = duck.swim();
 		assertThat(result).isTrue();
+	}
+
+	@Test
+	void 날_수_없다() {
+		Duck duck = new DecoyDuck();
+		assertThatThrownBy(duck::performFly)
+			.isInstanceOf(UnsupportedOperationException.class);
 	}
 
 	@Nested
