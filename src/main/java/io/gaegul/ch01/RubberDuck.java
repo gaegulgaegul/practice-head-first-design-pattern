@@ -1,6 +1,8 @@
 package io.gaegul.ch01;
 
-public class RubberDuck extends Duck {
+import io.gaegul.ch01.behavior.Quackable;
+
+public class RubberDuck extends Duck implements Quackable {
 
 	@Override
 	public void display() {
@@ -10,10 +12,5 @@ public class RubberDuck extends Duck {
 	@Override
 	public void quack() {
 		System.out.println("삑삑~");
-	}
-
-	@Override
-	public void fly() {
-		throw new UnsupportedOperationException("러버덕은 날 수 없습니다.");
 	}
 }
