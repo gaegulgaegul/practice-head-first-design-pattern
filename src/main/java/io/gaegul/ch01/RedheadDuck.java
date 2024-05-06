@@ -1,22 +1,16 @@
 package io.gaegul.ch01;
 
-import io.gaegul.ch01.behavior.FlyBehavior;
-import io.gaegul.ch01.behavior.QuackBehavior;
+import io.gaegul.ch01.behavior.FlyWithWings;
+import io.gaegul.ch01.behavior.Quack;
 
-public class RedheadDuck extends Duck implements FlyBehavior, QuackBehavior {
+public class RedheadDuck extends Duck {
+
+	public RedheadDuck() {
+		super(new FlyWithWings(), new Quack());
+	}
 
 	@Override
 	public void display() {
 		System.out.println("흰죽지오리");
-	}
-
-	@Override
-	public void fly() {
-		System.out.println("오리날다~!");
-	}
-
-	@Override
-	public void quack() {
-		System.out.println("꽥꽥~");
 	}
 }
