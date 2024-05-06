@@ -1,9 +1,9 @@
 package io.gaegul.ch01;
 
-import io.gaegul.ch01.behavior.Flyable;
-import io.gaegul.ch01.behavior.Quackable;
+import io.gaegul.ch01.behavior.FlyBehavior;
+import io.gaegul.ch01.behavior.QuackBehavior;
 
-public class RedheadDuck extends Duck implements Flyable, Quackable {
+public class RedheadDuck extends Duck implements FlyBehavior, QuackBehavior {
 
 	@Override
 	public void display() {

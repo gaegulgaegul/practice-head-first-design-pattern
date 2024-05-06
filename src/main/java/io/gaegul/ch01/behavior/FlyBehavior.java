@@ -1,5 +1,5 @@
 package io.gaegul.ch01.behavior;
 
-public interface Flyable {
+public interface FlyBehavior {
 	void fly();
 }

@@ -1,8 +1,8 @@
 package io.gaegul.ch01;
 
-import io.gaegul.ch01.behavior.Quackable;
+import io.gaegul.ch01.behavior.QuackBehavior;
 
-public class RubberDuck extends Duck implements Quackable {
+public class RubberDuck extends Duck implements QuackBehavior {
 
 	@Override
 	public void display() {
