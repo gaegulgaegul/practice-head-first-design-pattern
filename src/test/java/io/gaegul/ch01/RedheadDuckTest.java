@@ -16,8 +16,8 @@ class RedheadDuckTest extends ConsoleIOTest {
 
 	@Test
 	void 꽥꽥_울음소리를_낼_수_있다() {
-		RedheadDuck duck = new RedheadDuck();
-		duck.quack();
+		Duck duck = new RedheadDuck();
+		duck.performQuack();
 		assertThat(output()).isEqualTo("꽥꽥~");
 	}
 
@@ -30,8 +30,8 @@ class RedheadDuckTest extends ConsoleIOTest {
 
 	@Test
 	void 날_수_있다() {
-		RedheadDuck duck = new RedheadDuck();
-		duck.fly();
+		Duck duck = new RedheadDuck();
+		duck.performFly();
 		assertThat(output()).isEqualTo("오리날다~!");
 	}
 

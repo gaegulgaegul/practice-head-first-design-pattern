@@ -16,8 +16,8 @@ class RubberDuckTest extends ConsoleIOTest {
 
 	@Test
 	void 삑삑소리를_낼_수_있다() {
-		RubberDuck duck = new RubberDuck();
-		duck.quack();
+		Duck duck = new RubberDuck();
+		duck.performQuack();
 		assertThat(output()).isEqualTo("삑삑~");
 	}
 
