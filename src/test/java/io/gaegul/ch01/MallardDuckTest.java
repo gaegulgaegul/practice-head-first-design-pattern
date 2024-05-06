@@ -16,7 +16,7 @@ class MallardDuckTest extends ConsoleIOTest {
 
 	@Test
 	void 꽥꽥_울음소리를_낼_수_있다() {
-		Duck duck = new MallardDuck();
+		MallardDuck duck = new MallardDuck();
 		duck.quack();
 		assertThat(output()).isEqualTo("꽥꽥~");
 	}
@@ -30,7 +30,7 @@ class MallardDuckTest extends ConsoleIOTest {
 
 	@Test
 	void 날_수_있다() {
-		Duck duck = new MallardDuck();
+		MallardDuck duck = new MallardDuck();
 		duck.fly();
 		assertThat(output()).isEqualTo("오리날다~!");
 	}

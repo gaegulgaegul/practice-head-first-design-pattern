@@ -1,9 +1,7 @@
 package io.gaegul.ch01;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
@@ -18,7 +16,7 @@ class RubberDuckTest extends ConsoleIOTest {
 
 	@Test
 	void 삑삑소리를_낼_수_있다() {
-		Duck duck = new RubberDuck();
+		RubberDuck duck = new RubberDuck();
 		duck.quack();
 		assertThat(output()).isEqualTo("삑삑~");
 	}
@@ -28,13 +26,6 @@ class RubberDuckTest extends ConsoleIOTest {
 		Duck duck = new RubberDuck();
 		boolean result = duck.swim();
 		assertThat(result).isTrue();
-	}
-
-	@Test
-	void 날_수_없다() {
-		Duck duck = new RubberDuck();
-		assertThatThrownBy(duck::fly)
-			.isInstanceOf(UnsupportedOperationException.class);
 	}
 
 	@Nested

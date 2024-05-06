@@ -12,11 +12,11 @@ import io.gaegul.util.ConsoleIOTest;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 @DisplayName("오리 시뮬레이션 게임 - 흰죽지오리는")
-class RedheadTest extends ConsoleIOTest {
+class RedheadDuckTest extends ConsoleIOTest {
 
 	@Test
 	void 꽥꽥_울음소리를_낼_수_있다() {
-		Duck duck = new RedheadDuck();
+		RedheadDuck duck = new RedheadDuck();
 		duck.quack();
 		assertThat(output()).isEqualTo("꽥꽥~");
 	}
@@ -30,7 +30,7 @@ class RedheadTest extends ConsoleIOTest {
 
 	@Test
 	void 날_수_있다() {
-		Duck duck = new MallardDuck();
+		RedheadDuck duck = new RedheadDuck();
 		duck.fly();
 		assertThat(output()).isEqualTo("오리날다~!");
 	}
