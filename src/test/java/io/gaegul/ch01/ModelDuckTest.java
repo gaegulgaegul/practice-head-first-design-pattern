@@ -9,6 +9,7 @@ import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import io.gaegul.ch01.behavior.FLyRocketPowered;
 import io.gaegul.util.ConsoleIOTest;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
@@ -34,6 +35,14 @@ class ModelDuckTest extends ConsoleIOTest {
 		Duck duck = new ModelDuck();
 		assertThatThrownBy(duck::performFly)
 			.isInstanceOf(UnsupportedOperationException.class);
+	}
+
+	@Test
+	void 행동을_FlyRocketPowered로_변경하면_날_수_있다() {
+		Duck duck = new ModelDuck();
+		duck.flyBehavior(new FLyRocketPowered());
+		duck.performFly();
+		assertThat(output()).isEqualTo("로켓 추진으로 날아갑니다.");
 	}
 
 	@Nested
