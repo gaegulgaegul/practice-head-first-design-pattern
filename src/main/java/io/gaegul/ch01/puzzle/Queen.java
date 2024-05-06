@@ -10,6 +10,8 @@ public class Queen extends Character {
 
 	@Override
 	public void fight() {
-		System.out.println("여왕이 전투합니다.");
+		System.out.println("여왕은 ");
+		this.performWeapon();
+		System.out.println("으로 전투합니다.");
 	}
 }

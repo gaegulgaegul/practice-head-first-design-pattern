@@ -11,5 +11,13 @@ import lombok.AllArgsConstructor;
 public abstract class Character {
 	private WeaponBehavior weaponBehavior;
 
+	public void weaponBehavior(WeaponBehavior weaponBehavior) {
+		this.weaponBehavior = weaponBehavior;
+	}
+
+	void performWeapon() {
+		this.weaponBehavior.useWeapon();
+	}
+
 	public abstract void fight();
 }

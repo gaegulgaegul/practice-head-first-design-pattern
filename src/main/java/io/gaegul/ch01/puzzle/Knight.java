@@ -10,6 +10,8 @@ public class Knight extends Character {
 
 	@Override
 	public void fight() {
-		System.out.println("나이트가 전투합니다.");
+		System.out.println("나이트는 ");
+		this.performWeapon();
+		System.out.println("으로 전투합니다.");
 	}
 }

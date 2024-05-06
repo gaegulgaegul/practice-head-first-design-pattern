@@ -10,6 +10,8 @@ public class Troll extends Character {
 
 	@Override
 	public void fight() {
-		System.out.println("트롤이 전투합니다.");
+		System.out.println("트롤은 ");
+		this.performWeapon();
+		System.out.println("으로 전투합니다.");
 	}
 }
