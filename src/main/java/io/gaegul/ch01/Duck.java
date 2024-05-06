@@ -13,5 +13,9 @@ public abstract class Duck {
 		return true;
 	}
 
+	public void fly() {
+		System.out.println("오리날다~!");
+	}
+
 	public abstract void display();
 }
