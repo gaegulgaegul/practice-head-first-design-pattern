@@ -38,7 +38,7 @@ class ModelDuckTest extends ConsoleIOTest {
 	}
 
 	@Test
-	void 행동을_FlyRocketPowered로_변경하면_날_수_있다() {
+	void 로켓_추진_기능을_부여하면_날_수_있다() {
 		Duck duck = new ModelDuck();
 		duck.flyBehavior(new FLyRocketPowered());
 		duck.performFly();
