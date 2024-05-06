@@ -28,6 +28,13 @@ class MallardDuckTest extends ConsoleIOTest {
 		assertThat(result).isTrue();
 	}
 
+	@Test
+	void 날_수_있다() {
+		Duck duck = new MallardDuck();
+		duck.fly();
+		assertThat(output()).isEqualTo("오리날다~!");
+	}
+
 	@Nested
 	class display_메서드를_실행하면 {
 
