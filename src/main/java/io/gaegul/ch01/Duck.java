@@ -9,8 +9,8 @@ public abstract class Duck {
 		System.out.println("꽥꽥~");
 	}
 
-	public void swim() {
-		System.out.println("헤엄치다.");
+	public boolean swim() {
+		return true;
 	}
 
 	public abstract void display();
