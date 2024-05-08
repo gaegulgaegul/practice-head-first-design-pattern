@@ -1,4 +1,4 @@
-package io.gaegul.headfirstdesignpattern
+package io.gaegul
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
