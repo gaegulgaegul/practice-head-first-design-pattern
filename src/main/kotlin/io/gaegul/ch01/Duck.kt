@@ -13,5 +13,9 @@ abstract class Duck {
         return true
     }
 
+    fun fly() {
+        println("오리날다~!")
+    }
+
     abstract fun display()
 }
