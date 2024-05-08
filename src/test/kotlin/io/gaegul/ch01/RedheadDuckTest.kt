@@ -26,6 +26,12 @@ class RedheadDuckTest: ConsoleIOTest() {
     }
 
     @Test
+    fun `날 수 있다`() {
+        duck.fly()
+        assertThat(output()).isEqualTo("오리날다~!")
+    }
+
+    @Test
     fun `display()를 실행하면 흰죽지오리를 출력한다`() {
         duck.display()
         assertThat(output()).isEqualTo("흰죽지오리")
