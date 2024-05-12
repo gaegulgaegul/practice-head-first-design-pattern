@@ -8,4 +8,8 @@ class RubberDuck: Duck() {
     override fun quack() {
         println("삑삑~")
     }
+
+    override fun fly() {
+        throw UnsupportedOperationException("날 수 없습니다.")
+    }
 }

@@ -13,7 +13,7 @@ abstract class Duck {
         return true
     }
 
-    fun fly() {
+    open fun fly() {
         println("오리날다~!")
     }
 
