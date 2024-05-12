@@ -3,7 +3,6 @@ package io.gaegul.ch01
 import io.gaegul.utils.ConsoleIOTest
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
-import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
