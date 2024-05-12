@@ -15,7 +15,7 @@ class MallardDuckTest: ConsoleIOTest() {
 
     @Test
     fun `꽥꽥 울음소리를 낼 수 있다`() {
-        duck.quack()
+        duck.performQuack()
         assertThat(output()).isEqualTo("꽥꽥~")
     }
 
@@ -27,7 +27,7 @@ class MallardDuckTest: ConsoleIOTest() {
 
     @Test
     fun `날 수 있다`() {
-        duck.fly()
+        duck.performFly()
         assertThat(output()).isEqualTo("오리날다~!")
     }
 

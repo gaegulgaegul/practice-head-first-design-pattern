@@ -6,6 +6,6 @@ package io.gaegul.ch01.behavior
 class FlyWithWings: FlyBehavior {
 
     override fun fly() {
-        println("오리 날다~!")
+        println("오리날다~!")
     }
 }

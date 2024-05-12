@@ -16,7 +16,7 @@ class DecoyDuckTest: ConsoleIOTest() {
 
     @Test
     fun `소리를 낼 수 없다`() {
-        assertThatThrownBy { duck.quack() }
+        assertThatThrownBy { duck.performQuack() }
             .isInstanceOf(UnsupportedOperationException::class.java)
     }
 
@@ -28,7 +28,7 @@ class DecoyDuckTest: ConsoleIOTest() {
 
     @Test
     fun `날 수 없다`() {
-        assertThatThrownBy { duck.fly() }
+        assertThatThrownBy { duck.performFly() }
             .isInstanceOf(UnsupportedOperationException::class.java)
     }
 

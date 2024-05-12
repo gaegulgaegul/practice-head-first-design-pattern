@@ -1,15 +1,12 @@
 package io.gaegul.ch01
 
-class RubberDuck: Duck() {
+import io.gaegul.ch01.behavior.FlyNoWay
+import io.gaegul.ch01.behavior.Squeak
+
+class RubberDuck: Duck(
+    Squeak(), FlyNoWay()
+) {
     override fun display() {
         println("러버덕")
-    }
-
-    override fun quack() {
-        println("삑삑~")
-    }
-
-    override fun fly() {
-        throw UnsupportedOperationException("날 수 없습니다.")
     }
 }

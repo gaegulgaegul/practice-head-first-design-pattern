@@ -1,20 +1,26 @@
 package io.gaegul.ch01
 
+import io.gaegul.ch01.behavior.FlyBehavior
+import io.gaegul.ch01.behavior.QuackBehavior
+
 /**
  * 오리 슈퍼 클래스
  */
-abstract class Duck {
+abstract class Duck(
+    private var quackBehavior: QuackBehavior,
+    private var flyBehavior: FlyBehavior
+) {
 
-    open fun quack() {
-        println("꽥꽥~")
+    fun performQuack() {
+        quackBehavior.quack()
     }
 
     fun swim(): Boolean {
         return true
     }
 
-    open fun fly() {
-        println("오리날다~!")
+    fun performFly() {
+        flyBehavior.fly()
     }
 
     abstract fun display()

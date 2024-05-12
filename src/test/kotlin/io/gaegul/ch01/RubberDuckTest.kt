@@ -16,7 +16,7 @@ class RubberDuckTest: ConsoleIOTest() {
 
     @Test
     fun `삑삑 소리를 낼 수 있다`() {
-        duck.quack()
+        duck.performQuack()
         assertThat(output()).isEqualTo("삑삑~")
     }
 
@@ -28,7 +28,7 @@ class RubberDuckTest: ConsoleIOTest() {
 
     @Test
     fun `날 수 없다`() {
-        assertThatThrownBy { duck.fly() }
+        assertThatThrownBy { duck.performFly() }
             .isInstanceOf(UnsupportedOperationException::class.java)
     }
 
