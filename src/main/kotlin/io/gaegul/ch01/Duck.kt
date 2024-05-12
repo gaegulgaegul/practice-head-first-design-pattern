@@ -5,7 +5,7 @@ package io.gaegul.ch01
  */
 abstract class Duck {
 
-    fun quack() {
+    open fun quack() {
         println("꽥꽥~")
     }
 
