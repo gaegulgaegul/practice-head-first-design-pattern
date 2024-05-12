@@ -1,5 +1,6 @@
 package io.gaegul.ch01.puzzle
 
+import io.gaegul.ch01.puzzle.behavior.SwordBehavior
 import io.gaegul.utils.ConsoleIOTest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
@@ -13,6 +14,14 @@ class KnightTest: ConsoleIOTest() {
         val character = Knight()
         character.fight()
         assertThat(output()).isEqualTo("기사는 칼로 베는 행동으로 전투할 수 있다.")
+    }
+
+    @Test
+    fun `검을 휘두르는 행동으로 전투할 수 있다`() {
+        val character = Knight()
+        character.weaponBehavior = SwordBehavior()
+        character.fight()
+        assertThat(output()).isEqualTo("기사는 검을 휘두르는 행동으로 전투할 수 있다.")
     }
 
 }
