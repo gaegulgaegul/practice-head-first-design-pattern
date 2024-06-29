@@ -5,12 +5,12 @@ import java.util.List;
 
 import lombok.Getter;
 
-public class Pizza {
+public abstract class Pizza {
 	@Getter
-	private String name;
-	private String dough;
-	private String sauce;
-	private List<String> toppings = new ArrayList<>();
+	String name;
+	String dough;
+	String sauce;
+	List<String> toppings = new ArrayList<>();
 
 	public void prepare() {
 		System.out.println("Preparing " + name);
