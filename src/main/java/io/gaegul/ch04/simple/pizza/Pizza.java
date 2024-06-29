@@ -1,4 +1,4 @@
-package io.gaegul.ch04;
+package io.gaegul.ch04.simple.pizza;
 
 import java.util.ArrayList;
 import java.util.List;

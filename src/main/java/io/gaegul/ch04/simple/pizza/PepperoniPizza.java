@@ -1,4 +1,4 @@
-package io.gaegul.ch04;
+package io.gaegul.ch04.simple.pizza;
 
 public class PepperoniPizza extends Pizza {
 	public PepperoniPizza() {
