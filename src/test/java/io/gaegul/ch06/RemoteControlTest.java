@@ -21,6 +21,8 @@ class RemoteControlTest extends ConsoleIOTest {
 	private CeilingFan 거실_선풍기 = new CeilingFan("거실");
 	private GarageDoor 차고_문 = new GarageDoor("차고");
 	private Stereo 거실_오디오 = new Stereo("거실");
+	private TV 거실_TV = new TV("거실");
+	private Hottub 욕조 = new Hottub();
 
 	private Command 거실_조명_켜기;
 	private Command 거실_조명_끄기;
@@ -32,10 +34,17 @@ class RemoteControlTest extends ConsoleIOTest {
 	private Command 차고_문_닫기;
 	private Command 거실_오디오_켜기;
 	private Command 거실_오디오_끄기;
+	private Command 거실_TV_켜기;
+	private Command 거실_TV_끄기;
+	private Command 욕조_켜기;
+	private Command 욕조_끄기;
 
 	private Command 거실_선풍기_high_설정;
 	private Command 거실_선풍기_medium_설정;
 	private Command 거실_선풍기_low_설정;
+
+	private Command 파티_시작;
+	private Command 파티_끝;
 
 	@BeforeEach
 	public void setUp() {
@@ -51,9 +60,17 @@ class RemoteControlTest extends ConsoleIOTest {
 		차고_문_닫기 = new GarageDoorDownCommand(차고_문);
 		거실_오디오_켜기 = new StereoOnWithCDCommand(거실_오디오);
 		거실_오디오_끄기 = new StereoOffCommand(거실_오디오);
+		거실_TV_켜기 = new TVOnCommand(거실_TV);
+		거실_TV_끄기 = new TVOffCommand(거실_TV);
+		욕조_켜기 = new HottubOnCommand(욕조);
+		욕조_끄기 = new HottubOffCommand(욕조);
+
 		거실_선풍기_high_설정 = new CeilingFanHighCommand(거실_선풍기);
 		거실_선풍기_medium_설정 = new CeilingFanMediumCommand(거실_선풍기);
 		거실_선풍기_low_설정 = new CeilingFanLowCommand(거실_선풍기);
+
+		파티_시작 = new MacroCommand(거실_조명_켜기, 거실_오디오_켜기, 거실_TV_켜기, 욕조_켜기);
+		파티_끝 = new MacroCommand(거실_조명_끄기, 거실_오디오_끄기, 거실_TV_끄기, 욕조_끄기);
 	}
 
 	@Test
@@ -201,6 +218,40 @@ class RemoteControlTest extends ConsoleIOTest {
 			+ "거실 선풍기 속도가 MEDIUM로 설정되었습니다.\n"
 			+ "거실 선풍기 속도가 LOW로 설정되었습니다.\n"
 			+ "거실 선풍기 속도가 MEDIUM로 설정되었습니다.");
+	}
+
+	@Test
+	void 매크로_커맨드는_기능을_한번에_처리합니다() {
+		리모컨.setCommand(0, 파티_시작, 파티_끝);
+
+		System.out.println("------ 매크로 ON ------");
+		리모컨.onButtonWasPushed(0);
+		System.out.println("------ 매크로 OFF ------");
+		리모컨.offButtonWasPushed(0);
+		System.out.println("------ 매크로 UNDO ------");
+		리모컨.undoButtonWasPushed();
+
+		assertThat(output()).isEqualTo("------ 매크로 ON ------\n"
+			+ "거실 조명이 켜졌습니다.\n"
+			+ "거실 오디오가 켜졌습니다.\n"
+			+ "거실 오디오에서 CD가 재생됩니다.\n"
+			+ "거실 오디오 볼륨이 11로 설정되었습니다.\n"
+			+ "거실 TV가 켜졌습니다.\n"
+			+ "욕조 온도를 40도로 설정합니다.\n"
+			+ "현재 욕조 온도: 40도\n"
+			+ "------ 매크로 OFF ------\n"
+			+ "거실 조명이 꺼졌습니다.\n"
+			+ "거실 오디오가 꺼졌습니다.\n"
+			+ "거실 TV가 꺼졌습니다.\n"
+			+ "욕조 온도를 36도로 설정합니다.\n"
+			+ "------ 매크로 UNDO ------\n"
+			+ "욕조 온도를 40도로 설정합니다.\n"
+			+ "현재 욕조 온도: 40도\n"
+			+ "거실 TV가 켜졌습니다.\n"
+			+ "거실 오디오가 켜졌습니다.\n"
+			+ "거실 오디오에서 CD가 재생됩니다.\n"
+			+ "거실 오디오 볼륨이 11로 설정되었습니다.\n"
+			+ "거실 조명이 켜졌습니다.");
 	}
 
 	@DisplayName("슬롯 0번은 거실 조명")
