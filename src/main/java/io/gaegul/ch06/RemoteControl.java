@@ -12,6 +12,11 @@ public class RemoteControl {
 	Command[] offCommands;
 
 	/**
+	 * UNDO(되돌리기)를 사용하는 경우, 마지막으로 사용한 커맨드 객체를 넣는 변수
+	 */
+	Command undoCommand;
+
+	/**
 	 * 각 ON, OFF 배열의 인스턴스를 만들고 초기화
 	 */
 	public RemoteControl() {
@@ -20,9 +25,11 @@ public class RemoteControl {
 
 		Command noCommand = new NoCommand();
 		for (int i = 0; i < 7; i++) {
-			onCommands[i] = noCommand;
-			offCommands[i] = noCommand;
+			this.onCommands[i] = noCommand;
+			this.offCommands[i] = noCommand;
 		}
+
+		this.undoCommand = noCommand;
 	}
 
 	/**
@@ -43,6 +50,7 @@ public class RemoteControl {
 	public void onButtonWasPushed(int slot) {
 		if (onCommands[slot] != null) {
 			onCommands[slot].execute();
+			undoCommand = onCommands[slot];
 		}
 	}
 
@@ -53,6 +61,16 @@ public class RemoteControl {
 	public void offButtonWasPushed(int slot) {
 		if (offCommands[slot] != null) {
 			offCommands[slot].execute();
+			undoCommand = offCommands[slot];
+		}
+	}
+
+	/**
+	 * UNDO(되돌리기) 커맨드 실행
+	 */
+	public void undoButtonWasPushed() {
+		if (undoCommand != null) {
+			undoCommand.undo();
 		}
 	}
 
@@ -63,6 +81,7 @@ public class RemoteControl {
 		for (int i = 0; i < onCommands.length; i++) {
 			stringBuffer.append("[slot " + i + "] " + onCommands[i].getClass().getSimpleName() + "    " + offCommands[i].getClass().getSimpleName() + "\n");
 		}
+		stringBuffer.append("[undo] " + undoCommand.getClass().getSimpleName() + "\n");
 		return stringBuffer.toString();
 	}
 }
