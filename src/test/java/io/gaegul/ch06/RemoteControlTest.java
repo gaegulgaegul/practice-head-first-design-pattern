@@ -105,6 +105,74 @@ class RemoteControlTest extends ConsoleIOTest {
 			+ "거실 오디오가 꺼졌습니다.");
 	}
 
+	@Test
+	void 거실_조명을_켜고_끄고_되돌릴_수_있다() {
+		리모컨.setCommand(0, 거실_조명_켜기, 거실_조명_끄기);
+
+		리모컨.onButtonWasPushed(0);
+		리모컨.offButtonWasPushed(0);
+		리모컨.undoButtonWasPushed();
+
+		assertThat(output()).isEqualTo("거실 조명이 켜졌습니다.\n거실 조명이 꺼졌습니다.\n거실 조명이 켜졌습니다.");
+	}
+
+	@Test
+	void 주방_조명을_켜고_끄고_되돌릴_수_있다() {
+		리모컨.setCommand(0, 주방_조명_켜기, 주방_조명_끄기);
+
+		리모컨.onButtonWasPushed(0);
+		리모컨.offButtonWasPushed(0);
+		리모컨.undoButtonWasPushed();
+
+		assertThat(output()).isEqualTo("주방 조명이 켜졌습니다.\n주방 조명이 꺼졌습니다.\n주방 조명이 켜졌습니다.");
+	}
+
+	@Test
+	void 거실_선풍기을_켜고_끄고_되돌릴_수_있다() {
+		리모컨.setCommand(0, 거실_선풍기_켜기, 거실_선풍기_끄기);
+
+		리모컨.onButtonWasPushed(0);
+		리모컨.offButtonWasPushed(0);
+		리모컨.undoButtonWasPushed();
+
+		assertThat(output()).isEqualTo("거실 선풍기 속도가 HIGH로 설정되었습니다.\n"
+			+ "거실 선풍기가 꺼졌습니다.\n"
+			+ "거실 선풍기 속도가 HIGH로 설정되었습니다.");
+	}
+
+	@Test
+	void 차고_문을_켜고_끄고_되돌릴_수_있다() {
+		리모컨.setCommand(0, 차고_문_열기, 차고_문_닫기);
+
+		리모컨.onButtonWasPushed(0);
+		리모컨.offButtonWasPushed(0);
+		리모컨.undoButtonWasPushed();
+
+		assertThat(output()).isEqualTo("차고 문이 열었습니다.\n"
+			+ "차고 조명이 켜졌습니다.\n"
+			+ "차고 조명이 꺼졌습니다.\n"
+			+ "차고 문이 닫혔습니다.\n"
+			+ "차고 문이 열었습니다.\n"
+			+ "차고 조명이 켜졌습니다.");
+	}
+
+	@Test
+	void 거실_오디오을_켜고_끄고_되돌릴_수_있다() {
+		리모컨.setCommand(0, 거실_오디오_켜기, 거실_오디오_끄기);
+
+		리모컨.onButtonWasPushed(0);
+		리모컨.offButtonWasPushed(0);
+		리모컨.undoButtonWasPushed();
+
+		assertThat(output()).isEqualTo("거실 오디오가 켜졌습니다.\n"
+			+ "거실 오디오에서 CD가 재생됩니다.\n"
+			+ "거실 오디오 볼륨이 11로 설정되었습니다.\n"
+			+ "거실 오디오가 꺼졌습니다.\n"
+			+ "거실 오디오가 켜졌습니다.\n"
+			+ "거실 오디오에서 CD가 재생됩니다.\n"
+			+ "거실 오디오 볼륨이 11로 설정되었습니다.");
+	}
+
 	@DisplayName("슬롯 0번은 거실 조명")
 	@Nested
 	class slot0_living_room_light {
@@ -118,6 +186,28 @@ class RemoteControlTest extends ConsoleIOTest {
 
 			assertThat(output()).isEqualTo("거실 조명이 켜졌습니다.\n"
 				+ "거실 조명이 꺼졌습니다.");
+		}
+
+		@Test
+		void 명령을_설정하고_실행_후_되돌리기할_수_있다() {
+			리모컨.setCommand(0, 거실_조명_켜기, 거실_조명_끄기);
+
+			리모컨.onButtonWasPushed(0);
+			리모컨.offButtonWasPushed(0);
+			리모컨.undoButtonWasPushed();
+
+			assertThat(output()).isEqualTo("거실 조명이 켜졌습니다.\n"
+				+ "거실 조명이 꺼졌습니다.\n"
+				+ "거실 조명이 켜졌습니다.");
+		}
+
+		@Test
+		void 명령을_설정하면_슬롯을_확인할_수_있다() {
+			리모컨.setCommand(0, 거실_조명_켜기, 거실_조명_끄기);
+
+			리모컨.onButtonWasPushed(0);
+			리모컨.offButtonWasPushed(0);
+
 			assertThat(리모컨.toString()).isEqualTo("\n------ 리모컨 ------\n"
 				+ "[slot 0] LightOnCommand    LightOffCommand\n"
 				+ "[slot 1] NoCommand    NoCommand\n"
@@ -125,7 +215,8 @@ class RemoteControlTest extends ConsoleIOTest {
 				+ "[slot 3] NoCommand    NoCommand\n"
 				+ "[slot 4] NoCommand    NoCommand\n"
 				+ "[slot 5] NoCommand    NoCommand\n"
-				+ "[slot 6] NoCommand    NoCommand\n");
+				+ "[slot 6] NoCommand    NoCommand\n"
+				+ "[undo] LightOffCommand\n");
 		}
 
 		@DisplayName("슬롯 1번은 주방 조명")
@@ -146,6 +237,38 @@ class RemoteControlTest extends ConsoleIOTest {
 					+ "거실 조명이 꺼졌습니다.\n"
 					+ "주방 조명이 켜졌습니다.\n"
 					+ "주방 조명이 꺼졌습니다.");
+			}
+
+			@Test
+			void 명령을_설정하고_실행_후_되돌리기할_수_있다() {
+				리모컨.setCommand(0, 거실_조명_켜기, 거실_조명_끄기);
+				리모컨.setCommand(1, 주방_조명_켜기, 주방_조명_끄기);
+
+				리모컨.onButtonWasPushed(0);
+				리모컨.offButtonWasPushed(0);
+				리모컨.undoButtonWasPushed();
+				리모컨.onButtonWasPushed(1);
+				리모컨.offButtonWasPushed(1);
+				리모컨.undoButtonWasPushed();
+
+				assertThat(output()).isEqualTo("거실 조명이 켜졌습니다.\n"
+					+ "거실 조명이 꺼졌습니다.\n"
+					+ "거실 조명이 켜졌습니다.\n"
+					+ "주방 조명이 켜졌습니다.\n"
+					+ "주방 조명이 꺼졌습니다.\n"
+					+ "주방 조명이 켜졌습니다.");
+			}
+
+			@Test
+			void 명령을_설정하면_슬롯을_확인할_수_있다() {
+				리모컨.setCommand(0, 거실_조명_켜기, 거실_조명_끄기);
+				리모컨.setCommand(1, 주방_조명_켜기, 주방_조명_끄기);
+
+				리모컨.onButtonWasPushed(0);
+				리모컨.offButtonWasPushed(0);
+				리모컨.onButtonWasPushed(1);
+				리모컨.offButtonWasPushed(1);
+
 				assertThat(리모컨.toString()).isEqualTo("\n------ 리모컨 ------\n"
 					+ "[slot 0] LightOnCommand    LightOffCommand\n"
 					+ "[slot 1] LightOnCommand    LightOffCommand\n"
@@ -153,7 +276,8 @@ class RemoteControlTest extends ConsoleIOTest {
 					+ "[slot 3] NoCommand    NoCommand\n"
 					+ "[slot 4] NoCommand    NoCommand\n"
 					+ "[slot 5] NoCommand    NoCommand\n"
-					+ "[slot 6] NoCommand    NoCommand\n");
+					+ "[slot 6] NoCommand    NoCommand\n"
+					+ "[undo] LightOffCommand\n");
 			}
 
 			@DisplayName("슬롯 2번은 거실 선풍기")
@@ -179,6 +303,48 @@ class RemoteControlTest extends ConsoleIOTest {
 						+ "주방 조명이 꺼졌습니다.\n"
 						+ "거실 선풍기 속도가 HIGH로 설정되었습니다.\n"
 						+ "거실 선풍기가 꺼졌습니다.");
+				}
+
+				@Test
+				void 명령을_설정하고_실행_후_되돌리기할_수_있다() {
+					리모컨.setCommand(0, 거실_조명_켜기, 거실_조명_끄기);
+					리모컨.setCommand(1, 주방_조명_켜기, 주방_조명_끄기);
+					리모컨.setCommand(2, 거실_선풍기_켜기, 거실_선풍기_끄기);
+
+					리모컨.onButtonWasPushed(0);
+					리모컨.offButtonWasPushed(0);
+					리모컨.undoButtonWasPushed();
+					리모컨.onButtonWasPushed(1);
+					리모컨.offButtonWasPushed(1);
+					리모컨.undoButtonWasPushed();
+					리모컨.onButtonWasPushed(2);
+					리모컨.offButtonWasPushed(2);
+					리모컨.undoButtonWasPushed();
+
+					assertThat(output()).isEqualTo("거실 조명이 켜졌습니다.\n"
+						+ "거실 조명이 꺼졌습니다.\n"
+						+ "거실 조명이 켜졌습니다.\n"
+						+ "주방 조명이 켜졌습니다.\n"
+						+ "주방 조명이 꺼졌습니다.\n"
+						+ "주방 조명이 켜졌습니다.\n"
+						+ "거실 선풍기 속도가 HIGH로 설정되었습니다.\n"
+						+ "거실 선풍기가 꺼졌습니다.\n"
+						+ "거실 선풍기 속도가 HIGH로 설정되었습니다.");
+				}
+
+				@Test
+				void 명령을_설정하면_슬롯을_확인할_수_있다() {
+					리모컨.setCommand(0, 거실_조명_켜기, 거실_조명_끄기);
+					리모컨.setCommand(1, 주방_조명_켜기, 주방_조명_끄기);
+					리모컨.setCommand(2, 거실_선풍기_켜기, 거실_선풍기_끄기);
+
+					리모컨.onButtonWasPushed(0);
+					리모컨.offButtonWasPushed(0);
+					리모컨.onButtonWasPushed(1);
+					리모컨.offButtonWasPushed(1);
+					리모컨.onButtonWasPushed(2);
+					리모컨.offButtonWasPushed(2);
+
 					assertThat(리모컨.toString()).isEqualTo("\n------ 리모컨 ------\n"
 						+ "[slot 0] LightOnCommand    LightOffCommand\n"
 						+ "[slot 1] LightOnCommand    LightOffCommand\n"
@@ -186,7 +352,8 @@ class RemoteControlTest extends ConsoleIOTest {
 						+ "[slot 3] NoCommand    NoCommand\n"
 						+ "[slot 4] NoCommand    NoCommand\n"
 						+ "[slot 5] NoCommand    NoCommand\n"
-						+ "[slot 6] NoCommand    NoCommand\n");
+						+ "[slot 6] NoCommand    NoCommand\n"
+						+ "[undo] CeilingFanOffCommand\n");
 				}
 
 				@DisplayName("슬롯 3번은 거실 오디오")
@@ -219,6 +386,62 @@ class RemoteControlTest extends ConsoleIOTest {
 							+ "거실 오디오에서 CD가 재생됩니다.\n"
 							+ "거실 오디오 볼륨이 11로 설정되었습니다.\n"
 							+ "거실 오디오가 꺼졌습니다.");
+					}
+
+					@Test
+					void 명령을_설정하고_실행_후_되돌리기할_수_있다() {
+						리모컨.setCommand(0, 거실_조명_켜기, 거실_조명_끄기);
+						리모컨.setCommand(1, 주방_조명_켜기, 주방_조명_끄기);
+						리모컨.setCommand(2, 거실_선풍기_켜기, 거실_선풍기_끄기);
+						리모컨.setCommand(3, 거실_오디오_켜기, 거실_오디오_끄기);
+
+						리모컨.onButtonWasPushed(0);
+						리모컨.offButtonWasPushed(0);
+						리모컨.undoButtonWasPushed();
+						리모컨.onButtonWasPushed(1);
+						리모컨.offButtonWasPushed(1);
+						리모컨.undoButtonWasPushed();
+						리모컨.onButtonWasPushed(2);
+						리모컨.offButtonWasPushed(2);
+						리모컨.undoButtonWasPushed();
+						리모컨.onButtonWasPushed(3);
+						리모컨.offButtonWasPushed(3);
+						리모컨.undoButtonWasPushed();
+
+						assertThat(output()).isEqualTo("거실 조명이 켜졌습니다.\n"
+							+ "거실 조명이 꺼졌습니다.\n"
+							+ "거실 조명이 켜졌습니다.\n"
+							+ "주방 조명이 켜졌습니다.\n"
+							+ "주방 조명이 꺼졌습니다.\n"
+							+ "주방 조명이 켜졌습니다.\n"
+							+ "거실 선풍기 속도가 HIGH로 설정되었습니다.\n"
+							+ "거실 선풍기가 꺼졌습니다.\n"
+							+ "거실 선풍기 속도가 HIGH로 설정되었습니다.\n"
+							+ "거실 오디오가 켜졌습니다.\n"
+							+ "거실 오디오에서 CD가 재생됩니다.\n"
+							+ "거실 오디오 볼륨이 11로 설정되었습니다.\n"
+							+ "거실 오디오가 꺼졌습니다.\n"
+							+ "거실 오디오가 켜졌습니다.\n"
+							+ "거실 오디오에서 CD가 재생됩니다.\n"
+							+ "거실 오디오 볼륨이 11로 설정되었습니다.");
+					}
+
+					@Test
+					void 명령을_설정하면_슬롯을_확인할_수_있다() {
+						리모컨.setCommand(0, 거실_조명_켜기, 거실_조명_끄기);
+						리모컨.setCommand(1, 주방_조명_켜기, 주방_조명_끄기);
+						리모컨.setCommand(2, 거실_선풍기_켜기, 거실_선풍기_끄기);
+						리모컨.setCommand(3, 거실_오디오_켜기, 거실_오디오_끄기);
+
+						리모컨.onButtonWasPushed(0);
+						리모컨.offButtonWasPushed(0);
+						리모컨.onButtonWasPushed(1);
+						리모컨.offButtonWasPushed(1);
+						리모컨.onButtonWasPushed(2);
+						리모컨.offButtonWasPushed(2);
+						리모컨.onButtonWasPushed(3);
+						리모컨.offButtonWasPushed(3);
+
 						assertThat(리모컨.toString()).isEqualTo("\n------ 리모컨 ------\n"
 							+ "[slot 0] LightOnCommand    LightOffCommand\n"
 							+ "[slot 1] LightOnCommand    LightOffCommand\n"
@@ -226,7 +449,8 @@ class RemoteControlTest extends ConsoleIOTest {
 							+ "[slot 3] StereoOnWithCDCommand    StereoOffCommand\n"
 							+ "[slot 4] NoCommand    NoCommand\n"
 							+ "[slot 5] NoCommand    NoCommand\n"
-							+ "[slot 6] NoCommand    NoCommand\n");
+							+ "[slot 6] NoCommand    NoCommand\n"
+							+ "[undo] StereoOffCommand\n");
 					}
 
 					@DisplayName("슬롯 4번은 차고 문")
@@ -266,6 +490,75 @@ class RemoteControlTest extends ConsoleIOTest {
 								+ "차고 조명이 켜졌습니다.\n"
 								+ "차고 조명이 꺼졌습니다.\n"
 								+ "차고 문이 닫혔습니다.");
+						}
+
+						@Test
+						void 명령을_설정하고_실행_후_되돌리기할_수_있다() {
+							리모컨.setCommand(0, 거실_조명_켜기, 거실_조명_끄기);
+							리모컨.setCommand(1, 주방_조명_켜기, 주방_조명_끄기);
+							리모컨.setCommand(2, 거실_선풍기_켜기, 거실_선풍기_끄기);
+							리모컨.setCommand(3, 거실_오디오_켜기, 거실_오디오_끄기);
+							리모컨.setCommand(4, 차고_문_열기, 차고_문_닫기);
+
+							리모컨.onButtonWasPushed(0);
+							리모컨.offButtonWasPushed(0);
+							리모컨.undoButtonWasPushed();
+							리모컨.onButtonWasPushed(1);
+							리모컨.offButtonWasPushed(1);
+							리모컨.undoButtonWasPushed();
+							리모컨.onButtonWasPushed(2);
+							리모컨.offButtonWasPushed(2);
+							리모컨.undoButtonWasPushed();
+							리모컨.onButtonWasPushed(3);
+							리모컨.offButtonWasPushed(3);
+							리모컨.undoButtonWasPushed();
+							리모컨.onButtonWasPushed(4);
+							리모컨.offButtonWasPushed(4);
+							리모컨.undoButtonWasPushed();
+
+							assertThat(output()).isEqualTo("거실 조명이 켜졌습니다.\n"
+								+ "거실 조명이 꺼졌습니다.\n"
+								+ "거실 조명이 켜졌습니다.\n"
+								+ "주방 조명이 켜졌습니다.\n"
+								+ "주방 조명이 꺼졌습니다.\n"
+								+ "주방 조명이 켜졌습니다.\n"
+								+ "거실 선풍기 속도가 HIGH로 설정되었습니다.\n"
+								+ "거실 선풍기가 꺼졌습니다.\n"
+								+ "거실 선풍기 속도가 HIGH로 설정되었습니다.\n"
+								+ "거실 오디오가 켜졌습니다.\n"
+								+ "거실 오디오에서 CD가 재생됩니다.\n"
+								+ "거실 오디오 볼륨이 11로 설정되었습니다.\n"
+								+ "거실 오디오가 꺼졌습니다.\n"
+								+ "거실 오디오가 켜졌습니다.\n"
+								+ "거실 오디오에서 CD가 재생됩니다.\n"
+								+ "거실 오디오 볼륨이 11로 설정되었습니다.\n"
+								+ "차고 문이 열었습니다.\n"
+								+ "차고 조명이 켜졌습니다.\n"
+								+ "차고 조명이 꺼졌습니다.\n"
+								+ "차고 문이 닫혔습니다.\n"
+								+ "차고 문이 열었습니다.\n"
+								+ "차고 조명이 켜졌습니다.");
+						}
+
+						@Test
+						void 명령을_설정하면_슬롯을_확인할_수_있다() {
+							리모컨.setCommand(0, 거실_조명_켜기, 거실_조명_끄기);
+							리모컨.setCommand(1, 주방_조명_켜기, 주방_조명_끄기);
+							리모컨.setCommand(2, 거실_선풍기_켜기, 거실_선풍기_끄기);
+							리모컨.setCommand(3, 거실_오디오_켜기, 거실_오디오_끄기);
+							리모컨.setCommand(4, 차고_문_열기, 차고_문_닫기);
+
+							리모컨.onButtonWasPushed(0);
+							리모컨.offButtonWasPushed(0);
+							리모컨.onButtonWasPushed(1);
+							리모컨.offButtonWasPushed(1);
+							리모컨.onButtonWasPushed(2);
+							리모컨.offButtonWasPushed(2);
+							리모컨.onButtonWasPushed(3);
+							리모컨.offButtonWasPushed(3);
+							리모컨.onButtonWasPushed(4);
+							리모컨.offButtonWasPushed(4);
+
 							assertThat(리모컨.toString()).isEqualTo("\n------ 리모컨 ------\n"
 								+ "[slot 0] LightOnCommand    LightOffCommand\n"
 								+ "[slot 1] LightOnCommand    LightOffCommand\n"
@@ -273,7 +566,8 @@ class RemoteControlTest extends ConsoleIOTest {
 								+ "[slot 3] StereoOnWithCDCommand    StereoOffCommand\n"
 								+ "[slot 4] GarageDoorUpCommand    GarageDoorDownCommand\n"
 								+ "[slot 5] NoCommand    NoCommand\n"
-								+ "[slot 6] NoCommand    NoCommand\n");
+								+ "[slot 6] NoCommand    NoCommand\n"
+								+ "[undo] GarageDoorDownCommand\n");
 						}
 					}
 				}
