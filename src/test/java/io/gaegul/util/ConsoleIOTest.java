@@ -9,20 +9,20 @@ import org.junit.jupiter.api.BeforeEach;
 /**
  * 콘솔 출력 문자열 테스트 헬퍼 클래스
  */
-public abstract class ConsoleIOTest {
+public class ConsoleIOTest {
 
 	private ByteArrayOutputStream outputStreamCaptor;
 	private PrintStream standardOut; // 표준 스트림
 
 	@BeforeEach
-	void setUp() {
+	void setUpConsole() {
 		standardOut = System.out; // 표준 스트림 초기화
 		outputStreamCaptor = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(outputStreamCaptor));
 	}
 
 	@AfterEach
-	protected void printResult() {
+	void printResult() {
 		System.setOut(standardOut); // 표준 스트림 할당
 		System.out.println(output()); // 원하는 내용이 잘 나왔는지 문자열 디코딩 바이트를 가져와 출력
 	}

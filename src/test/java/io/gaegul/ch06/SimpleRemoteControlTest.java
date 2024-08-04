@@ -22,6 +22,6 @@ class SimpleRemoteControlTest extends ConsoleIOTest {
 		remote.setCommand(lightOn);
 		remote.buttonWasPressed();
 
-		assertThat(output()).isEqualTo("불이 켜졌습니다.");
+		assertThat(output()).isEqualTo("조명이 켜졌습니다.");
 	}
 }
