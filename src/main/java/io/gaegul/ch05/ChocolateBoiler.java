@@ -7,18 +7,15 @@ public class ChocolateBoiler {
 	private boolean empty;
 	private boolean boiled;
 
-	private static ChocolateBoiler instance;
+	private static ChocolateBoiler instance = new ChocolateBoiler();
 
 	private ChocolateBoiler() {
 		this.empty = true;
 		this.boiled = false;
+		System.out.println("[%s] init ChocolateBoiler".formatted(Thread.currentThread().getName()));
 	}
 
-	public static synchronized ChocolateBoiler getInstance() {
-		if (instance == null) {
-			System.out.println("[%s] init ChocolateBoiler".formatted(Thread.currentThread().getName()));
-			instance = new ChocolateBoiler();
-		}
+	public static ChocolateBoiler getInstance() {
 		System.out.println("[%s] return instance".formatted(Thread.currentThread().getName()));
 		return instance;
 	}
