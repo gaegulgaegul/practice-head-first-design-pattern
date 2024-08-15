@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 class ChocolateBoilerTest {
 
 	@Test
-	void 멀티스레딩_테스트() {
+	void 멀티스레딩_동기화_테스트() {
 		CompletableFuture<Void> future1 = CompletableFuture.runAsync(ChocolateBoilerTest::executeChocolateBoiler);
 		CompletableFuture<Void> future2 = CompletableFuture.runAsync(ChocolateBoilerTest::executeChocolateBoiler);
 		CompletableFuture.allOf(future1, future2);
